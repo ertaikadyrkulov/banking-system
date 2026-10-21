@@ -11,10 +11,11 @@
     </parent>
 
     <artifactId>services</artifactId>
+    <packaging>pom</packaging>
     <name>services</name>
 
     <modules>
-<!--        <module>...</module>-->
+        <module>auth-service</module>
     </modules>
 
 </project>
