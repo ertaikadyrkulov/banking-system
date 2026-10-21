@@ -1,3 +1,33 @@
+server:
+  port: ${AUTH_SERVICE_PORT:8081}
+
 spring:
   application:
-    name: auth-service
+    name: ${AUTH_SERVICE_NAME:auth-service}
+
+  profiles:
+    active: ${SPRING_PROFILE:dev}
+
+  threads:
+    virtual:
+      enabled: true
+
+  config:
+    import:
+      - optional:classpath:.env[.properties]
+      - optional:file:.env[.properties]
+
+  datasource:
+    url: ${AUTH_SERVICE_DB_URL:jdbc:postgresql://localhost:5432/auth-service-db}
+    username: ${AUTH_SERVICE_DB_USER:admin}
+    password: ${AUTH_SERVICE_DB_PASSWORD:admin}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: ${AUTH_SERVICE_DB_SHOW_SQL:true}
+        format_sql: true
