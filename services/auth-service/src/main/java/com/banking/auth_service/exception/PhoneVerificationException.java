@@ -1,12 +1,15 @@
 package com.banking.auth_service.exception;
 
 import com.banking.auth_service.exception.model.Reason;
+import com.banking.exception.ApplicationException;
 import lombok.Getter;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
-public class PhoneVerificationException extends RuntimeException {
+public class PhoneVerificationException extends ApplicationException {
 
     private final Reason reason;
     private final Duration retryAfter;
@@ -18,7 +21,12 @@ public class PhoneVerificationException extends RuntimeException {
             Integer attemptsLeft,
             Throwable cause
     ) {
-        super("Hello");
+        super(
+                reason.getErrorCode(),
+                reason.getErrorCode().getDefaultMessage(),
+                cause,
+                createDetails(retryAfter, attemptsLeft)
+        );
 
         this.reason = reason;
         this.retryAfter = retryAfter;
@@ -49,6 +57,23 @@ public class PhoneVerificationException extends RuntimeException {
         return new PhoneVerificationException(
                 Reason.INVALID_CODE, null, attemptsLeft, null
         );
+    }
+
+    private static Map<String, Object> createDetails(
+            Duration retryAfter,
+            Integer attemptsLeft
+    ) {
+        Map<String, Object> details = new HashMap<>();
+
+        if (retryAfter != null) {
+            details.put("retryAfterSeconds", retryAfter.toSeconds());
+        }
+
+        if (attemptsLeft != null) {
+            details.put("attemptsLeft", attemptsLeft);
+        }
+
+        return details;
     }
 
 }
