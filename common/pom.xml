@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.pro</groupId>
+        <groupId>com.banking</groupId>
         <artifactId>banking-system</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -14,7 +14,7 @@
     <name>common</name>
 
     <modules>
-
+        <module>banking-exception-starter</module>
     </modules>
 
 </project>

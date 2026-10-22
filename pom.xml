@@ -13,7 +13,7 @@
 
     <packaging>pom</packaging>
 
-    <groupId>com.pro</groupId>
+    <groupId>com.banking</groupId>
     <artifactId>banking-system</artifactId>
     <version>1.0.0</version>
 
