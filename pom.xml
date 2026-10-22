@@ -19,6 +19,7 @@
 
     <modules>
         <module>services</module>
+        <module>common</module>
     </modules>
 
     <properties>
