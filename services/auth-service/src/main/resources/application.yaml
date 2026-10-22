@@ -19,8 +19,9 @@ spring:
 
   datasource:
     url: ${AUTH_SERVICE_DB_URL:jdbc:postgresql://localhost:5432/auth-service-db}
-    username: ${AUTH_SERVICE_DB_USER:admin}
-    password: ${AUTH_SERVICE_DB_PASSWORD:admin}
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     open-in-view: false
@@ -29,5 +30,29 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        show_sql: ${AUTH_SERVICE_DB_SHOW_SQL:true}
+        show_sql: ${DB_SHOW_SQL:true}
         format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  data:
+    redis:
+      host: ${AUTH_SERVICE_REDIS_HOST:localhost}
+      port: ${AUTH_SERVICE_REDIS_PORT:6379}
+
+  cache:
+      type: redis
+
+application:
+  otp:
+    length: ${AUTH_SERVICE_OTP_LENGTH:6}
+    ttl: ${AUTH_SERVICE_OTP_TTL:5m}
+    max-attempts: ${AUTH_SERVICE_OTP_MAX_ATTEMPTS:5}
+    resend-cooldown: ${AUTH_SERVICE_OTP_RESEND_COOLDOWN:120s}
+    max-sends-per-day: ${AUTH_SERVICE_OTP_MAX_SENDS_PER_DAY:5}
+    lock-duration: ${AUTH_SERVICE_OTP_LOCK_DURATION:15m}
+    verification-token-ttl: ${AUTH_SERVICE_OTP_VERIFICATION_TOKEN_TTL:10m}
+    pepper: ${AUTH_SERVICE_OTP_PEPPER}
