@@ -1,0 +1,8 @@
+package com.pro.auth_service.util;
+
+public record PhoneNumberData(
+        String phoneCountryCode,
+        String phoneNumber,
+        String internationalPhone,
+        String nationalPhoneNumber
+) {}
