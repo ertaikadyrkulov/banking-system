@@ -5,7 +5,6 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: bank-application-db
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
