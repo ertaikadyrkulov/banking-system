@@ -18,8 +18,8 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>services</module>
         <module>common</module>
+        <module>services</module>
     </modules>
 
     <properties>
@@ -33,6 +33,16 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.banking</groupId>
+                <artifactId>banking-exception-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
