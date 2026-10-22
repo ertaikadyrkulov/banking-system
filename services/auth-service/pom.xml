@@ -75,6 +75,11 @@
             <version>9.0.40</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.banking</groupId>
+            <artifactId>banking-exception-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
