@@ -12,6 +12,7 @@ import com.banking.auth_service.util.AuthUtil;
 import com.banking.auth_service.util.PhoneNumberData;
 import com.banking.auth_service.util.PhoneUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PhoneVerificationService {
 
     private final StringRedisTemplate redisTemplate;
@@ -94,6 +96,7 @@ public class PhoneVerificationService {
                 );
         redisTemplate.expire(codeKey, properties.ttl());
 
+        // TODO: event publish
 //        NotificationEvent event = NotificationEvent.of(
 //                phoneNumber.phoneCountryCode(),
 //                phoneNumber.phoneNumber(),
@@ -101,6 +104,8 @@ public class PhoneVerificationService {
 //        );
 //
 //        eventPublisher.publishEvent(event);
+
+        log.info("[DEV] OTP for {}: {}", phone, code);
 
         return new RequestOtpResponse(properties.resendCooldown().toSeconds());
     }
