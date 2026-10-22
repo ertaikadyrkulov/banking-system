@@ -1,15 +1,20 @@
 package com.banking.auth_service.exception;
 
-public class InvalidPhoneNumberException extends RuntimeException {
+import com.banking.auth_service.exception.model.AuthErrorCode;
+import com.banking.exception.ValidationException;
 
-    public InvalidPhoneNumberException() {
-        super("Invalid phone number");
+public class InvalidPhoneNumberException extends ValidationException {
+
+    public InvalidPhoneNumberException(String message) {
+        super(AuthErrorCode.INVALID_PHONE_NUMBER, message);
     }
 
-    public InvalidPhoneNumberException(
-            Throwable cause
-    ) {
-        super("Invalid phone number", cause);
+    public InvalidPhoneNumberException() {
+        super(AuthErrorCode.INVALID_PHONE_NUMBER);
+    }
+
+    public InvalidPhoneNumberException(Throwable cause) {
+        super(AuthErrorCode.INVALID_PHONE_NUMBER, cause);
     }
 
 }
